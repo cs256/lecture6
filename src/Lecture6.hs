@@ -131,17 +131,26 @@ length'' = foldl (\n x -> n + 1) 0
 --------------------------------------------------------------------------------
 -- count
 
--- count 't' "witter" => 2
+-- Specification:
+--  count 't' "witter" => 2
 
+-- count using explicit recursion
+count :: Eq a => a -> [a] -> Int
+count x []     = 0
+count x (y:ys)
+    | x == y    = 1 + count x ys
+    | otherwise =     count x ys
 
+-- count using length and filter
+count' x xs = length (filter (==x) xs)
+-- the $ operator can be used to avoid brackets
+count''' x xs = length $ filter (==x) xs
 
+-- function composition
+(.) :: (b -> c) -> (a -> b) -> a -> c
+(.) f g x = f (g x)
 
-
-
-
-
-
-
-
+-- count using the composition of length and filter
+count'' x = length . filter (==x)
 
 --------------------------------------------------------------------------------
