@@ -5,7 +5,8 @@
 
 module Lecture6 where
 
-import Prelude hiding (map, filter, and, product, length, foldr, foldl, (.))
+import Prelude hiding ( map, filter, and, product, length, foldr, foldl, (.)
+                      , curry, uncurry )
 import Data.Char (isUpper)
 
 --------------------------------------------------------------------------------
@@ -74,6 +75,12 @@ uppers' = filter isUpper
 uncurriedAdd :: (Int, Int) -> Int
 uncurriedAdd (x,y) = x + y
 
+curry :: ((a,b) -> c) -> a -> b -> c
+curry f x y = f (x,y)
+
+uncurry :: (a -> b -> c) -> (a,b) -> c
+uncurry f (x,y) = f x y
+
 uncurriedAdd' :: (Int, Int) -> Int
 uncurriedAdd' = uncurry (+)
 
@@ -125,5 +132,16 @@ length'' = foldl (\n x -> n + 1) 0
 -- count
 
 -- count 't' "witter" => 2
+
+
+
+
+
+
+
+
+
+
+
 
 --------------------------------------------------------------------------------
